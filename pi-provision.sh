@@ -3,6 +3,11 @@
 set -e
 set -u
 
+function partition() {
+    echo "$1" | grep 'mmcblk' > /dev/null 2>&1 && echo "$1p$2" && return
+    echo "$1$2"
+}
+
 if [ "$#" -ne 3 ]; then
   echo "Usage: $0 <1|2> <device> <hostname>"
   exit 1
@@ -34,20 +39,20 @@ p
 w
 " | fdisk $DEV
 
-echo "Unmounting ${DEV}1..."
-umount ${DEV}1 || echo "Already unmounted."
+echo "Unmounting $(partition $DEV 1)..."
+umount $(partition $DEV 1) || echo "Already unmounted."
 
-mkfs.vfat ${DEV}1
+mkfs.vfat $(partition $DEV 1)
 mkdir -p boot
-mount ${DEV}1 boot
+mount $(partition $DEV 1) boot
 
 sleep 5
-echo "Unmounting ${DEV}2..."
-umount ${DEV}2 || echo "Already unmounted."
+echo "Unmounting $(partition $DEV 2)..."
+umount $(partition $DEV 2) || echo "Already unmounted."
 
-mkfs.ext4 ${DEV}2
+mkfs.ext4 $(partition $DEV 2)
 mkdir -p root
-mount ${DEV}2 root
+mount $(partition $DEV 2) root
 
 if [ ! -f ArchLinuxARM-rpi-$VERSION-latest.tar.gz ]
 then
