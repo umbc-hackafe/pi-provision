@@ -74,7 +74,7 @@ echo "$PIHOST" > root/etc/hostname
 
 umount boot root
 sync
-eject $DEV
+eject $DEV || true
 
 echo "DONE -- Boot up Pi and connect to network"
 
