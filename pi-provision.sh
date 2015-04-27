@@ -90,4 +90,4 @@ while true; do ping -c 1 $PIHOST > /dev/null && break; sleep 5; done
 
 echo "Prepare to run 'salt $PIHOST. state.highstate' on the salt master"
 
-ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null root@$PIHOST 'pacman --noconfirm -Syu;pacman --noconfirm -S salt-zmq; salt-minion -l debug'
+ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null root@$PIHOST 'pacman --noconfirm -Syu;pacman --noconfirm -S salt-zmq; salt-call state.highstate -l debug'
