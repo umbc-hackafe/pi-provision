@@ -78,6 +78,8 @@ arm_freq=1000
 core_freq=500
 sdram_freq=500
 over_voltage=6
+gpu_mem_256=16
+gpu_mem_512=16
 EOF
 
 umount boot root
