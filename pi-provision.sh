@@ -88,7 +88,7 @@ eject $DEV || true
 
 echo "DONE -- Boot up Pi and connect to network"
 
-while true; do ping -c 1 $PIHOST > /dev/null && break; sleep 5; done
+while true; do curl -s $PIHOST:22 | grep -qi ssh && break; sleep 5; done
 
 echo "Prepare to run 'salt $PIHOST. state.highstate' on the salt master"
 
