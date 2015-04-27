@@ -93,4 +93,4 @@ while true; do curl -s $PIHOST:22 | grep -qi ssh && break; sleep 5; done
 
 echo "Connecting... Please enter 'root':"
 
-ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null root@$PIHOST 'pacman --noconfirm -Syu;pacman --noconfirm -S salt-zmq; salt-call state.highstate -l debug'
+ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null root@$PIHOST 'pacman --noconfirm -Syu;pacman --noconfirm -S salt-zmq; systemctl start salt-minion; salt-call state.highstate -l debug'
