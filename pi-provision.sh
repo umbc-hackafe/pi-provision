@@ -89,8 +89,9 @@ eject $DEV || true
 echo "DONE -- Boot up Pi and connect to network"
 echo "Waiting for SSH on $PIHOST..."
 
-while true; do curl -s $PIHOST:22 | grep -qi ssh && break; sleep 5; done
 
 echo "Connecting... Please enter 'root':"
+while true; do ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null root@$PIHOST 'pacman --noconfirm -Syu;pacman --noconfirm -S salt-zmq; systemctl start salt-minion' && break || sleep 30; done
 
-ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null root@$PIHOST 'pacman --noconfirm -Syu;pacman --noconfirm -S salt-zmq; systemctl start salt-minion; salt-call state.highstate -l debug'
+echo "Run 'salt-key -a ${PIHOST}.yourdomain.tld'"
+ssh salt
