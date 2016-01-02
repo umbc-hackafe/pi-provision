@@ -92,6 +92,3 @@ echo "Waiting for SSH on $PIHOST..."
 
 echo "Connecting... Please enter 'root':"
 while true; do ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null root@$PIHOST 'pacman --noconfirm -Syu;pacman --noconfirm -S salt-zmq; systemctl start salt-minion' && break || sleep 30; done
-
-echo "Run 'salt-key -a ${PIHOST}.yourdomain.tld'"
-ssh salt
