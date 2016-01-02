@@ -57,11 +57,11 @@ mount $(partition $DEV 2) root
 if [ ! -f ArchLinuxARM-rpi-$VERSION-latest.tar.gz ]
 then
     if [ "$VERSION" -eq "1" ]; then
-	curl -O http://archlinuxarm.org/os/ArchLinuxARM-rpi-latest.tar.gz
+	curl -LO http://archlinuxarm.org/os/ArchLinuxARM-rpi-latest.tar.gz
 	mv ArchLinuxARM-rpi-latest.tar.gz ArchLinuxARM-rpi-1-latest.tar.gz
     elif [ "$VERSION" -eq "2" -a ! -f ArchLinuxARM-rpi-2-latest.tar.gz ]
     then
-        curl -O http://archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
+        curl -LO http://archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
     fi
 fi
 
