@@ -71,7 +71,7 @@ sync
 mv root/boot/* boot
 
 echo "$PIHOST" > root/etc/hostname
-
+echo "PermitRootLogin yes" >> root/etc/ssh/sshd_config
 cat <<EOF | >> boot/config.txt
 
 arm_freq=1000
